@@ -4,7 +4,7 @@
      *  Autoloads classes, interfaces, and traits. It also automatically include the vendor autoloader if the folder is present.
      *  **requires that the zas-config.json be configured properly.**
      */
-    class AutoLoader{
+    class ZasAutoLoader{
         const ZC_TRAIT = "trait";
         const ZC_CLASS = "class";
         const ZC_ACLASS = "abstractClass";
