@@ -1,0 +1,14 @@
+{
+    "name": "levizwannah/zas-php-cli",
+    "description": "The CLI tool for the ZasEnv",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Levi Kamara Zwannah",
+            "email": "levizwannah@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
