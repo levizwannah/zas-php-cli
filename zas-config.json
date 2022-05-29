@@ -1,0 +1,62 @@
+{
+    "directories": {
+        "root": "zas-php-cli",
+        "supporters": "supporters",
+        "actors": "actors"
+    },
+
+    "actors": {
+        "foreground": "foreground",
+        "background": "background"
+    },
+
+    "extensions": {
+        "class": "class.php",
+        "abstractClass": "aclass.php",
+        "interface": "ifc.php",
+        "trait": "trait.php",
+        "constantsClass": "const.php",
+        "include": "inc.php",
+        "config": "conf",
+        "actors": {
+            "foreground": "php",
+            "background": "php"
+        }
+    },
+
+    "templatePath": {
+        "class": "/supporters/templates/class.tpl",
+        "abstractClass": "/supporters/templates/aclass.tpl",
+        "interface": "/supporters/templates/interface.tpl",
+        "trait": "/supporters/templates/trait.tpl",
+        "constantsClass": "/supporters/templates/const.tpl",
+        "actors" : {
+            "foreground": "/supporters/templates/foreground.tpl",
+            "background": "/supporters/templates/background.tpl"
+        }
+    },
+
+    "path": {
+        "class": "/supporters/classes",
+        "abstractClass": "/supporters/abstracts",
+        "interface": "/supporters/interfaces",
+        "trait": "/supporters/traits",
+        "constantsClass": "/supporters/constants",
+        "config": "/supporters/configs",
+        "actors": {
+            "foreground":"/actors/foreground",
+            "background":"/actors/background"
+        },
+        "supporters":"/supporters"
+    },
+
+    "nameConventionsRegex": {
+        "abstractClass": "^Abstract\\w+$",
+        "interface": "^\\w+Interface$",
+        "trait": "\\w+Trait$",
+        "constantsClass": "\\w+Constants$",
+        "class": ".*"
+    },
+
+    "fileNameSeparator": "-"
+}
