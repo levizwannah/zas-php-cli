@@ -64,7 +64,7 @@
          * @return void
          */
         public function printHelp(){
-            echo file_get_contents("cmd.txt");
+            echo file_get_contents(__DIR__. "/cmd.txt");
         }
         
         #----------------------------------------------------
