@@ -13,6 +13,7 @@
 
         /**
          * Handles the commands
+         * Returns true if the command was found or false otherwise
          * @param int $argc
          * @param array $argv
          * 
@@ -32,20 +33,20 @@
                 case ZasConstants::ZC_MAKE:
                     {
                         $this->execMake($argc, $argv);
-                        break;
+                        return true;
                     }
                 case ZasConstants::ZC_UPD_ROOT:
                     {
                         $this->updateRootPath();
-                        break;
+                        return true;
                     }
                 case ZasConstants::ZC_RUN:
                     {
                         $this->run($argc, $argv);
-                        break;
+                        return true;
                     }
             }
-            
+            return false;
         }
     }
 
