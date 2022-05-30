@@ -44,10 +44,6 @@
                         $this->run($argc, $argv);
                         break;
                     }
-                default:
-                {
-                    ZasHelper::log("Didn't call any case");
-                }
             }
             
         }
