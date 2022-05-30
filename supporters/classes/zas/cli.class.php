@@ -23,7 +23,7 @@
             
             if($argc < 2){
                 $this->printHelp();
-                return;
+                return true;
             }
 
             # show list
@@ -43,6 +43,11 @@
                 case ZasConstants::ZC_RUN:
                     {
                         $this->run($argc, $argv);
+                        return true;
+                    }
+                case ZasConstants::ZC_HELP:
+                    {
+                        $this->printHelp();
                         return true;
                     }
             }
