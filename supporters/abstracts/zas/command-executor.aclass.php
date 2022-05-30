@@ -43,32 +43,6 @@
             return (new System())->makeDirectory($path);
         }
 
-        protected function getFullPath(string $path){
-            $fullPath = $this->rootDir . $path;
-
-            #if file does not exist using the project zas-config
-            #then get local zas config and use it to test the project
-            if(!file_exists($fullPath)){
-                # Cli::log("$fullPath doesn't exists");
-
-                $zasConf = json_decode(
-                    file_get_contents(__DIR__ ."/../../../zas-config.json")
-                );
-
-                $root = $zasConf->directories->root;
-
-                $parentDir = preg_split("/$root/", __DIR__);
-                $rootDir = $parentDir[0].DIRECTORY_SEPARATOR."$root";
-
-                if(file_exists("$rootDir$path") && !is_dir("$rootDir$path")){
-                    # Cli::log("$rootDir$path exists");
-                    return "$rootDir$path";
-                }
-            }
-
-            return $fullPath;
-        }
-
     }
 
 ?>

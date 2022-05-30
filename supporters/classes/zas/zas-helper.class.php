@@ -422,7 +422,7 @@
                         }
 
                         if($actorTypeDir == ""){
-                            ZasHelper::log("ERROR::ACTOR: No actor type");
+                            ZasHelper::log("ERROR::ACTOR: Actor type must be fore or back");
                             return;
                         }
 
@@ -433,11 +433,38 @@
 
                         if($isDir){
                             $maker = new FolderMaker($this->zasConfig);
-                            $maker->in($actorTypeDir)->make($parentDirName.DIRECTORY_SEPARATOR.$containerName);
+                            $dirName = $maker->in($actorTypeDir)->make($parentDirName.DIRECTORY_SEPARATOR.$containerName);
+
+                            # make the setup file
+                            $maker = new FileMaker($this->zasConfig);
+                            $file = (object)$maker->in($dirName)->make($this->zasConfig->setupFileName, "php");
+
+                            if(!$file->exists){
+                                $tmpContent = file_get_contents($this->getFullPath($this->zasConfig->templatePath->setup));
+
+                                $setupFile = "master.setup";
+                                if(!file_exists($dirName."/../$setupFile.php")){
+                                    $setupFile = $this->zasConfig->setupFileName;
+                                }
+
+                                $tmpContent = str_replace("[SN]", $setupFile, $tmpContent);
+                                file_put_contents($file->fullPath, $tmpContent); 
+                            }
                         }
                         else{
                             $file = (object) $maker->in($actorTypeDir)->make($containerName, $parentDirName);
-                            file_put_contents($file->fullPath, ZasConstants::TXT_PHP_INIT);
+                            
+                            $tmpPath = $this->getFullPath($this->zasConfig->templatePath->actors->all);
+                            
+                            $tmpContent = file_get_contents($tmpPath);
+
+                            $setupFile = "master.setup";
+                            if(!file_exists(dirname($file->fullPath) . "/../$setupFile.php")){
+                                $setupFile = $this->zasConfig->setupFileName;
+                            }
+
+                            $tmpContent = str_replace("[SN]", $setupFile, $tmpContent);
+                            file_put_contents($file->fullPath, $tmpContent);
                         }
 
                         

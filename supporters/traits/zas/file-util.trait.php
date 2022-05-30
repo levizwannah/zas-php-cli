@@ -46,6 +46,42 @@
 
             return $newStr;
         }
+
+        /**
+         * Returns the full path of a given path.
+         * @param string $path
+         * @param string $rootDirectory should be added if the 
+         * class doesn't have the roodDir property present.
+         * @return string
+         */
+        public function getFullPath(string $path, string $rootDirectory = ""){
+            if(empty($rootDirectory)) $rootDirectory = $this->rootDir;
+
+            $fullPath = $rootDirectory . $path;
+
+            #if file does not exist using the project zas-config
+            #then get local zas config and use it to test the project
+            if(!file_exists($fullPath)){
+                # Cli::log("$fullPath doesn't exists");
+
+                $zasConf = json_decode(
+                    file_get_contents(__DIR__ ."/../../../zas-config.json")
+                );
+
+                $root = $zasConf->directories->root;
+
+                $parentDir = preg_split("/$root/", __DIR__);
+                $rootDir = $parentDir[0].DIRECTORY_SEPARATOR."$root";
+
+                if(file_exists("$rootDir$path") && !is_dir("$rootDir$path")){
+                    # Cli::log("$rootDir$path exists");
+                    return "$rootDir$path";
+                }
+            }
+
+            return $fullPath;
+        }
+
     }
 
 ?>
