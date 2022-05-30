@@ -51,10 +51,12 @@
          * Returns the full path of a given path.
          * @param string $path
          * @param string $rootDirectory should be added if the 
-         * class doesn't have the roodDir property present.
+         * class doesn't have the rootDir property present.
          * @return string
          */
         public function getFullPath(string $path, string $rootDirectory = ""){
+            if(file_exists($path)) return $path;
+            
             if(empty($rootDirectory)) $rootDirectory = $this->rootDir;
 
             $fullPath = $rootDirectory . $path;

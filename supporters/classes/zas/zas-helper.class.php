@@ -437,7 +437,7 @@
 
                             # make the setup file
                             $maker = new FileMaker($this->zasConfig);
-                            $file = (object)$maker->in($dirName)->make($this->zasConfig->setupFileName, "php");
+                            $file = (object)$maker->in($dirName)->make($this->zasConfig->setupFileName, "");
 
                             if(!$file->exists){
                                 $tmpContent = file_get_contents($this->getFullPath($this->zasConfig->templatePath->setup));
@@ -587,7 +587,7 @@
         public static function log($txt){
             if(is_array($txt)){
                 foreach($txt as $cnt){
-                    self::log($cnt);
+                    ZasHelper::log($cnt);
                 }
                 return;
             }
