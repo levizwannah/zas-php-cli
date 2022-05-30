@@ -580,11 +580,17 @@
 
         /**
          * Write text to the console
-         * @param string $txt
+         * @param string|array $txt
          * 
          * @return void
          */
-        public static function log(string $txt){
+        public static function log($txt){
+            if(is_array($txt)){
+                foreach($txt as $cnt){
+                    self::log($cnt);
+                }
+                return;
+            }
             echo "$txt\n";
         }
     }
