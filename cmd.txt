@@ -1,4 +1,4 @@
-Zas Commands:
+Default Zas Commands:
     1. php zas make [container] [name] [--f] [options]
        i. [container]:  class - for class 
                         ab-class - for abstract class, 

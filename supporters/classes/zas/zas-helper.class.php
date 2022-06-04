@@ -64,7 +64,13 @@
          * @return void
          */
         public function printHelp(){
+
             echo file_get_contents(__DIR__ . "/../../../cmd.txt");
+            $customCommands = $this->rootDir . DIRECTORY_SEPARATOR . "cmd.txt";
+            if(file_exists($customCommands)){
+                echo "\n==========================================\n\n";
+                echo file_get_contents($customCommands);
+            }
         }
         
         #----------------------------------------------------
