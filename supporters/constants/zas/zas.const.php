@@ -20,6 +20,7 @@
                 ZC_ABCLASS = "ab-class",
                 ZC_INFC = "interface",
                 ZC_CONST = "class-const",
+                ZC_CONFIG = "config",
                 ZC_UPD_ROOT = "update-root-path",
                 ZC_ACTOR = "actor",
                 ZC_SUPPORTER = "supporter",

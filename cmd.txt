@@ -36,3 +36,6 @@ Zas Commands:
                                           this is the path to the background process.   
        ii. [argument list] - if the file accept any agruments or input, pass the 
                               arguments just list it will appear to the file.
+
+    4. php zas make config [name]
+        i. [name] the name of the config file. This file will be placed the config folder specified in the zas-config.json

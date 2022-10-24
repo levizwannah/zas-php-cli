@@ -506,6 +506,11 @@
 
                             break;
                     }
+                case ZasConstants::ZC_CONFIG:
+                    {
+                        
+                        break;
+                    }
                 default:
                    {
                        ZasHelper::log("Command incomplete:: please select the container");
