@@ -137,7 +137,25 @@
 
             require($path);
             return true;
-        } 
+        }
+        
+        /**
+         * Gets the actual name being loaded
+         * @param mixed $qualifiedName
+         * 
+         * @return array<string,string> ["actualName" => "actualName", "beginsAt" => $i];
+         */
+        private function actualName($qualifiedName){
+            $an = "";
+            $i = strlen($qualifiedName);
+
+            for($i = $i - 1; $i >= 0; $i--){
+                if($qualifiedName[$i] == "/" || $qualifiedName[$i] == "\\") break;
+                $an = $qualifiedName[$i] . $an;
+            }
+
+            return ["actualName" => $an, "beginsAt" => $i];
+        }
 
         /**
          * @param string $name Name to load. This will include the namespace plus specific name conventions.
@@ -147,13 +165,18 @@
         public function load($name){
             #check the name to know whether we are loading a class, interface, trait, or abstract class.
             #name include namespace to it.
-            # echo "loading: $name\n";
-            $splittedNames = preg_split("/\W/", $name);
-            $size = count($splittedNames);
+            echo "loading: $name\n";
+
+            $actualName = $this->actualName($name);
+            $beginsAt = $actualName["beginsAt"];
+            $actualName = $actualName["actualName"];
+            $namespace = substr($name, 0, $beginsAt + 1);
+
+            echo "ActualName: $actualName\n";
+            echo "Namespace: $namespace\n";
 
             #are we actually loading something?
-            if($size < 1) return;
-            $actualName = $splittedNames[$size - 1];
+            if(empty($actualName)) return;
 
             foreach((array)$this->convRegex as $type => $regex){
                if(!preg_match("/$regex/", $actualName)) continue;
@@ -162,9 +185,9 @@
                 $nextRegex = preg_replace("/\W/", "", $nextRegex);
                 $actualName = preg_replace("/$nextRegex/", "", $actualName);
 
-                array_pop($splittedNames);
-                $name = implode("\\", $splittedNames) . "\\$actualName";
-    
+                $name = "$namespace$actualName";
+                echo "Qualified name: $name\n";
+
                switch($type){
                    case "abstractClass": {
                        return $this->loadAbstractClass($name);
@@ -218,37 +241,97 @@
          * However, the file separator is specified in the zasconfig.json.
          * 
          * takes O(n) time.
-         * @param string $fileName
+         * @param string $name
          * 
          * @return string
          */
-        private function toZasName(string $fileName, string $separator = "-"): string{
-            $fileName = trim($fileName);
-            $length = strlen($fileName);
+        public function toZasName(string $name, string $separator = "-"): string{
+            $name = trim($name);
             
             $newStr = "";
-            $firstCharMet = false;
+            $pastChar = false;
+            
+            for($i = 0; $i < strlen($name); $i++){
+            
+                $char = $name[$i];
+            
+                if($this->isUpper($char)){
 
-            for($i = 0; $i < $length; $i++){
+                    $char = $this->lower($char);
+                    if($pastChar) $newStr .= $separator;
 
-                if($firstCharMet && preg_match("/[A-Z]/", $fileName[$i])){
-                    $newStr .= $separator . strtolower($fileName[$i]);
-                    continue;
                 }
-
-                if(!$firstCharMet){
-                    $firstCharMet = preg_match("/[a-zA-Z]/", $fileName[$i]) == true;
-                }
-
-                if($firstCharMet){
-                    $firstCharMet = !preg_match("/[\/\\\]/", $fileName[$i]);
-                }
-
-                $newStr .= strtolower($fileName[$i]);
+            
+                $newStr .= $char;
+                $pastChar = $this->isLetter($char);
             }
 
             return $newStr;
         }
+
+        /**
+         * Checks if a letter is an upper case letter
+         * @param string $char character
+         * 
+         * @return bool
+         */                 
+        public function isUpper($char){
+            $c = ord($char);
+            if($c >= 65 && $c <= 90) return true;
+
+            return false;
+        }
+
+        /**
+         * converts a letter to an upper case letter
+         * @param string $char character
+         * 
+         * @return string
+         */
+        public function upper($char){
+            if(!static::isLower($char)) return $char;
+
+            $c = ord($char);
+            return chr($c - ord('a') + ord('A'));
+        }
+
+        /**
+         * Checks if a character is lower case
+         * @param string $char character
+         * 
+         * @return bool
+         */
+        public function isLower($char){
+            $c = ord($char);
+            if($c >= 97 && $c <= 122) return true;
+
+            return false;
+        }
+
+        /**
+         * converts a letter to lower case
+         * @param string $char character
+         * 
+         * @return string
+         */
+        public function lower($char){
+            if(!static::isUpper($char)) return $char;
+
+            $c = ord($char);
+            return chr($c + ord('a') - ord('A'));
+        }
+
+
+        /**
+         * Returns true if the character is an ASCII letter
+         * @param string $char character
+         * 
+         * @return bool
+         */
+        public function isLetter($char){
+            return static::isUpper($char) || static::isLower($char);
+        }
+
     }
 
 ?>

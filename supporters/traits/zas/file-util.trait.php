@@ -25,9 +25,7 @@
             $newStr = "";
             $pastChar = false;
             
-            $length = strlen($name);
-            
-            for($i = 0; $i < strlen($length); $i++){
+            for($i = 0; $i < strlen($name); $i++){
             
                 $char = $name[$i];
             
