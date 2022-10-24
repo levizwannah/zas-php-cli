@@ -17,7 +17,7 @@
         "trait": "trait.php",
         "constantsClass": "const.php",
         "include": "inc.php",
-        "config": "conf",
+        "config": "config.php",
         "actors": {
             "foreground": "php",
             "background": "php"
@@ -30,6 +30,7 @@
         "interface": "/supporters/templates/interface.tpl",
         "trait": "/supporters/templates/trait.tpl",
         "constantsClass": "/supporters/templates/const.tpl",
+        "config": "/supporters/templates/config.tpl",
         "setup": "/supporters/templates/setup.tpl",
         "actors" : {
             "foreground": "/supporters/templates/foreground.tpl",

@@ -15,33 +15,31 @@
          * However, the file separator is specified in the zasconfig.json.
          * 
          * takes O(n) time.
-         * @param string $fileName
+         * @param string $name
          * 
          * @return string
          */
-        public function toZasName(string $fileName, string $separator = "-"): string{
-            $fileName = trim($fileName);
-            $length = strlen($fileName);
+        public function toZasName(string $name, string $separator = "-"): string{
+            $name = trim($name);
             
             $newStr = "";
-            $firstCharMet = false;
+            $pastChar = false;
+            
+            $length = strlen($name);
+            
+            for($i = 0; $i < strlen($length); $i++){
+            
+                $char = $name[$i];
+            
+                if(Character::isUpper($char)){
 
-            for($i = 0; $i < $length; $i++){
+                    $char = Character::lower($char);
+                    if($pastChar) $newStr .= $separator;
 
-                if($firstCharMet && preg_match("/[A-Z]/", $fileName[$i])){
-                    $newStr .= $separator . strtolower($fileName[$i]);
-                    continue;
                 }
-
-                if(!$firstCharMet){
-                    $firstCharMet = preg_match("/[a-zA-Z]/", $fileName[$i]) == true;
-                }
-
-                if($firstCharMet){
-                    $firstCharMet = !preg_match("/[\/\\\]/", $fileName[$i]);
-                }
-
-                $newStr .= strtolower($fileName[$i]);
+            
+                $newStr .= $char;
+                $pastChar = Character::isLetter($char);
             }
 
             return $newStr;

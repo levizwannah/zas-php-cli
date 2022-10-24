@@ -5,18 +5,26 @@
 |-------------------------------------------------------------
 */
 
-[NS]
+namespace Zas;
 
 #uns#
 
 
-class [CN] <INHERITANCE> <CONTRACTS> {
+/**
+ * Used to return configuration values
+ */
+class Config {
 
     # use traits
     #ut#
 
-    [C-VISIBILITY] function __construct(){
+    private function __construct(){
         #code...
+    }
+
+    public function __callStatic($name, $arguments)
+    {
+        
     }
 }
 
