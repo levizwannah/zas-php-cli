@@ -45,10 +45,9 @@
         private function getPath($name, $extension, $path){
             #names contain their namespaces attached to them.
            
-            $name = str_replace("\\", "/", $name);
             $name = $this->toZasName($name, $this->fileNameSeparator);
             $fullPath = __DIR__."/$path/$name.$extension";
-            
+
             return $fullPath;
         }
 
@@ -178,12 +177,13 @@
             #are we actually loading something?
             if(empty($actualName)) return;
 
-            foreach((array)$this->convRegex as $type => $regex){
+            foreach($this->convRegex as $type => $regex){
                if(!preg_match("/$regex/", $actualName)) continue;
 
-                $nextRegex = preg_replace("/\\\w{1}/", "", $regex);
+                $nextRegex = str_replace("\\w", "", $regex);
+                //preg_replace("/\\\w{1}/", "", $regex);
                 $nextRegex = preg_replace("/\W/", "", $nextRegex);
-                $actualName = preg_replace("/$nextRegex/", "", $actualName);
+                $actualName = str_replace($nextRegex, "", $actualName);
 
                 $name = "$namespace$actualName";
                 echo "Qualified name: $name\n";
