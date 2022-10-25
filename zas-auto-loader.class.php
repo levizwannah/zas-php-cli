@@ -164,17 +164,12 @@
         public function load($name){
             #check the name to know whether we are loading a class, interface, trait, or abstract class.
             #name include namespace to it.
-            echo "loading: $name\n";
 
             $actualName = $this->actualName($name);
             $beginsAt = $actualName["beginsAt"];
             $actualName = $actualName["actualName"];
             $namespace = substr($name, 0, $beginsAt + 1);
 
-            echo "ActualName: $actualName\n";
-            echo "Namespace: $namespace\n";
-
-            #are we actually loading something?
             if(empty($actualName)) return;
 
             foreach($this->convRegex as $type => $regex){
@@ -186,7 +181,6 @@
                 $actualName = str_replace($nextRegex, "", $actualName);
 
                 $name = "$namespace$actualName";
-                echo "Qualified name: $name\n";
 
                switch($type){
                    case "abstractClass": {
@@ -289,7 +283,7 @@
          * @return string
          */
         public function upper($char){
-            if(!static::isLower($char)) return $char;
+            if(!$this->isLower($char)) return $char;
 
             $c = ord($char);
             return chr($c - ord('a') + ord('A'));
@@ -315,7 +309,7 @@
          * @return string
          */
         public function lower($char){
-            if(!static::isUpper($char)) return $char;
+            if(!$this->isUpper($char)) return $char;
 
             $c = ord($char);
             return chr($c + ord('a') - ord('A'));
@@ -329,7 +323,7 @@
          * @return bool
          */
         public function isLetter($char){
-            return static::isUpper($char) || static::isLower($char);
+            return $this->isUpper($char) || $this->isLower($char);
         }
 
     }
