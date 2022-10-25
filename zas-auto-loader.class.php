@@ -9,6 +9,7 @@
         const ZC_CLASS = "class";
         const ZC_ACLASS = "abstractClass";
         const ZC_CONST = "constantsClass";
+        const ZC_INTERFACE = "interface";
         /**
          * Path Object from the zas-config
          */
@@ -34,8 +35,9 @@
         public function __construct()
         {
             #Use the Zas configuration to set the extensions and path
-            $zasConfig = file_get_contents(__DIR__. "/zas-config.json");
-            $config = json_decode($zasConfig);
+            global $zasConfig;
+            //$zasConfig = $zasConfig ?? file_get_contents(__DIR__. "/zas-config.json");
+            $config = $zasConfig ?? json_decode(file_get_contents(__DIR__. "/zas-config.json"));
             $this->path = $config->path;
             $this->extensions = $config->extensions;
             $this->convRegex = $config->nameConventionsRegex;
@@ -176,23 +178,22 @@
                if(!preg_match("/$regex/", $actualName)) continue;
 
                 $nextRegex = str_replace("\\w", "", $regex);
-                //preg_replace("/\\\w{1}/", "", $regex);
                 $nextRegex = preg_replace("/\W/", "", $nextRegex);
                 $actualName = str_replace($nextRegex, "", $actualName);
 
                 $name = "$namespace$actualName";
 
                switch($type){
-                   case "abstractClass": {
+                   case $this::ZC_ACLASS: {
                        return $this->loadAbstractClass($name);
                    }
-                   case "trait": {
+                   case $this::ZC_TRAIT: {
                        return $this->loadTrait($name);
                    }
-                   case "interface": {
+                   case $this::ZC_INTERFACE: {
                        return $this->loadInterface($name);
                    }
-                   case "constantsClass": {
+                   case $this::ZC_CONST: {
                        return $this->loadConstantsClass($name);
                    }
                    default: {
@@ -220,13 +221,13 @@
          * registers the vendor autoloader if it exists and registers our autoloading function
          */
         public function autoLoad(){
+            
+            spl_autoload_register([$this, "load"]);
+
             #setting vendor autoloading
             if(is_dir(__DIR__."/vendor")){
                 require (__DIR__."/vendor/autoload.php");
             }   
-
-            spl_autoload_register([$this, "load"]);
-            # echo "Autoloading...\n";
         }
 
         /**

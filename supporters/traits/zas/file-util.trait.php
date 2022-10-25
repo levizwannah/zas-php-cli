@@ -68,7 +68,7 @@
 
                 $root = $zasConf->directories->root;
 
-                $parentDir = preg_split("/$root/", __DIR__);
+                $parentDir = preg_split("/$root/", __DIR__, 2);
                 $rootDir = $parentDir[0].DIRECTORY_SEPARATOR."$root";
 
                 if(file_exists("$rootDir$path") && !is_dir("$rootDir$path")){
@@ -78,6 +78,21 @@
             }
 
             return $fullPath;
+        }
+
+
+        /**
+         * Get's the Main ZAS config file
+         * @return object
+         */
+        public function getZasConfig(){
+            global $zasConfig;
+            if($zasConfig) return $zasConfig;
+
+            $file = __DIR__. "/../../../../../../zas-config.json";
+            if(!file_exists($file)) $file = __DIR__ ."/../../../zas-config.json";
+
+            return json_decode(file_get_contents($file));
         }
 
     }
