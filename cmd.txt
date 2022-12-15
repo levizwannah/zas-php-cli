@@ -1,10 +1,10 @@
 Default Zas Commands:
     1. php zas make [container] [name] [--f] [options]
        i. [container]:  class - for class 
-                        ab-class - for abstract class, 
+                        abstract - for abstract class, 
                         trait - for trait, 
                         interface - for interface, 
-                        class-const - for constants class (A class that houses constants only)
+                        constant - for constants class (A class that houses constants only)
 
       ii. [name]: name for the container.
                   don't include the container 

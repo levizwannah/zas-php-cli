@@ -9,6 +9,6 @@
 require(__DIR__ ."/[SN].php");
 
 
-# code...
+// code...
 
 ?>

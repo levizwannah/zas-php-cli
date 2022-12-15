@@ -118,7 +118,7 @@
                                 return "use $value;";
                         }, $list);
                         $fmt = new Formatter();
-                        $output = $fmt->tabOnEnter(implode("\n", $output) . "\n". ClassObject::UT, ZasConstants::FUNC_INDENT_TAB);
+                        $output = $fmt->tabOnEnter(implode("\n", $output) . "\n". ClassObject::UT, ZasConstant::FUNC_INDENT_TAB);
                 });
 
                 if($this->changeMap[ClassObject::UT] === ""){

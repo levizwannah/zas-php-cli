@@ -1,12 +1,12 @@
 <?php
-    // Comments with #.# are required by `zas` for code insertion.
+// Comments with #.# are required by `zas` for code insertion.
 
-    namespace Zas;
+namespace Zas;
 
-    #uns#
+#uns#
 
 
-    class TraitObject extends Transpiler implements CodeMakerInterface {
+class TraitObject extends Transpiler implements CodeMakerInterface {
 
         /**
          * Constants representing what should be manipulated in the trait.tpl
@@ -28,8 +28,8 @@
          * @param array $changeMap The change map should contain the trait name, and the namespace denoted by [TN] => TraitName, [NS] => qualifiedNamespace for example
          */
         public function __construct(array $changeMap){
-            parent::__construct($changeMap, TraitObject::$temPath);
-            $this->defaultChangeMap[TraitObject::UNS] = "#uns#";
+                parent::__construct($changeMap, TraitObject::$temPath);
+                $this->defaultChangeMap[TraitObject::UNS] = "#uns#";
         }
 
 
@@ -38,21 +38,21 @@
          * @return string
          */
         public function makePhpCode(){
-            if(!$this->canMakePhpCode()) return "";
+                if(!$this->canMakePhpCode()) return "";
 
-            #format interfaces
-            $this->formatTraits();
-            $fmt = new Formatter();    
-            #namespace usage
-            if(!empty($this->useNsString)){
-                    $useNs = $fmt->tabOnEnter(implode("\n", $this->useNsString) . "\n". IfcObject::UNS);
-                    $this->changeMap[IfcObject::UNS] = $useNs;
-            }
-            
-            #do final transpilation
-            $this->transpile();
-            
-            return $this->phpCode;
+                #format interfaces
+                $this->formatTraits();
+                $fmt = new Formatter();    
+                #namespace usage
+                if(!empty($this->useNsString)){
+                        $useNs = $fmt->tabOnEnter(implode("\n", $this->useNsString) . "\n". IfcObject::UNS);
+                        $this->changeMap[IfcObject::UNS] = $useNs;
+                }
+                
+                #do final transpilation
+                $this->transpile();
+                
+                return $this->phpCode;
         }
 
         /**
@@ -61,19 +61,19 @@
          */
         protected function formatTraits(){
                 
-            $this->changeMap[TraitObject::UT] = $this->format($this->traits, function(&$list, &$output){
-                    $fmt = new Formatter();
+                $this->changeMap[TraitObject::UT] = $this->format($this->traits, function(&$list, &$output){
+                        $fmt = new Formatter();
 
-                    $output = array_map(function($value){
-                            return "use $value;";
-                    }, $list);
+                        $output = array_map(function($value){
+                                return "use $value;";
+                        }, $list);
 
-                    $output = $fmt->tabOnEnter(implode("\n", $output) . "\n". TraitObject::UT, ZasConstants::FUNC_INDENT_TAB);
-            });
+                        $output = $fmt->tabOnEnter(implode("\n", $output) . "\n". TraitObject::UT, ZasConstant::FUNC_INDENT_TAB);
+                });
 
-            if($this->changeMap[TraitObject::UT] === ""){
-                    $this->changeMap[TraitObject::UT] = TraitObject::UT;   
-            }
+                if($this->changeMap[TraitObject::UT] === ""){
+                        $this->changeMap[TraitObject::UT] = TraitObject::UT;   
+                }
         }
 
         /**
@@ -99,6 +99,6 @@
 
                 return $this;
         }
-    }
+}
 
 ?>

@@ -55,15 +55,15 @@
             $actualName = $this->capitalizeWords($this->getName($name));
 
             switch($regexPosition){
-                case ZasConstants::R_START:
+                case ZasConstant::R_START:
                     {
                         return "$namespace\\".preg_replace("/^[$flUpper$flLower]$remainingLetters/", "", $actualName);
                     }
-                case ZasConstants::R_END:
+                case ZasConstant::R_END:
                     {
                         return "$namespace\\".preg_replace("/[$flUpper$flLower]$remainingLetters$/", "", $actualName);
                     }
-                case ZasConstants::R_ANYWHERE:
+                case ZasConstant::R_ANYWHERE:
                     {
                         return "$namespace\\".preg_replace("/[$flUpper$flLower]$remainingLetters/", "", $actualName);
                     }
@@ -75,8 +75,8 @@
         /**
          * Makes a file regardless of its directory
          * @param string $qualifiedName - full name of the container include its namespace
-         * @param string $zasPathStr - path as in Zas config. use one of `ZasConstants::ZCFG_*`
-         * @param string $zasExtStr - extension as in Zas config. use one of `ZasConstants::ZCFG_*`
+         * @param string $zasPathStr - path as in Zas config. use one of `ZasConstant::ZCFG_*`
+         * @param string $zasExtStr - extension as in Zas config. use one of `ZasConstant::ZCFG_*`
          * 
          * @return array `[exists => bool, actualName=>"acutalName", namespace => "namespace", homeDir => "homeDir", filePath => "filePath"]`
          */
@@ -116,7 +116,7 @@
          */
         public function makeClass(string $className, string $parentClassName = "", array $impInterfaces = [], array $useTraits = [], bool $force = false){
 
-            $madeFile = (object)$this->makeFile($className, ZasConstants::ZCFG_CLASS, ZasConstants::ZCFG_CLASS);
+            $madeFile = (object)$this->makeFile($className, ZasConstant::ZCFG_CLASS, ZasConstant::ZCFG_CLASS);
             $namespace = $madeFile->namespace;
             $homeDir = $madeFile->homeDir;
             $actualName = $madeFile->actualName;
@@ -165,10 +165,10 @@
             $regex = preg_replace("/\W/", "", $regex);
 
             # remove trait from the traitName incase it is there.
-            $className = $this->cleanName($className, $regex, ZasConstants::R_END);
+            $className = $this->cleanName($className, $regex, ZasConstant::R_END);
 
 
-            $madeFile = (object)$this->makeFile($className, ZasConstants::ZCFG_CONST, ZasConstants::ZCFG_CONST);
+            $madeFile = (object)$this->makeFile($className, ZasConstant::ZCFG_CONST, ZasConstant::ZCFG_CONST);
             $namespace = $madeFile->namespace;
             $homeDir = $madeFile->homeDir;
             $actualName = $madeFile->actualName;
@@ -219,10 +219,10 @@
             $regex = preg_replace("/\W/", "", $regex);
 
             # remove Abstract from the className incase it is there.
-            $className = $this->cleanName($className, $regex, ZasConstants::R_START);
+            $className = $this->cleanName($className, $regex, ZasConstant::R_START);
 
 
-            $madeFile = (object)$this->makeFile($className, ZasConstants::ZCFG_ACLASS, ZasConstants::ZCFG_ACLASS);
+            $madeFile = (object)$this->makeFile($className, ZasConstant::ZCFG_ACLASS, ZasConstant::ZCFG_ACLASS);
             $namespace = $madeFile->namespace;
             $homeDir = $madeFile->homeDir;
             $actualName = $madeFile->actualName;
@@ -303,9 +303,9 @@
             $regex = preg_replace("/\W/", "", $regex);
 
             # remove trait from the traitName incase it is there.
-            $interfaceName = $this->cleanName($interfaceName, $regex, ZasConstants::R_END);
+            $interfaceName = $this->cleanName($interfaceName, $regex, ZasConstant::R_END);
 
-            $madeFile = (object)$this->makeFile($interfaceName, ZasConstants::ZCFG_IFC, ZasConstants::ZCFG_IFC);
+            $madeFile = (object)$this->makeFile($interfaceName, ZasConstant::ZCFG_IFC, ZasConstant::ZCFG_IFC);
             $namespace = $madeFile->namespace;
             $homeDir = $madeFile->homeDir;
             $actualName = $madeFile->actualName;
@@ -354,9 +354,9 @@
             $regex = preg_replace("/\W/", "", $regex);
 
             # remove trait from the traitName incase it is there.
-            $traitName = $this->cleanName($traitName, $regex, ZasConstants::R_END);
+            $traitName = $this->cleanName($traitName, $regex, ZasConstant::R_END);
             
-            $madeFile = (object)$this->makeFile($traitName, ZasConstants::ZCFG_TRAIT, ZasConstants::ZCFG_TRAIT);
+            $madeFile = (object)$this->makeFile($traitName, ZasConstant::ZCFG_TRAIT, ZasConstant::ZCFG_TRAIT);
             $namespace = $madeFile->namespace;
             $homeDir = $madeFile->homeDir;
             $actualName = $madeFile->actualName;

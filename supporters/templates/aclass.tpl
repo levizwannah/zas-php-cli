@@ -11,11 +11,11 @@
 
 abstract class [CN] <INHERITANCE> <CONTRACTS> {
 
-    # use traits
+    // use traits
     #ut#
 
     [C-VISIBILITY] function __construct(){
-        #code...
+        // code...
     }
 }
 
