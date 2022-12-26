@@ -30,7 +30,7 @@
             $this->loadConfig();
             $root = $this->zasConfig->directories->root;
 
-            $parentDir = preg_split("/$root/", __DIR__);
+            $parentDir = preg_split("/$root/", __DIR__, 2);
             $this->rootDir = $parentDir[0].DIRECTORY_SEPARATOR."$root";
         }
 
@@ -38,7 +38,12 @@
          * Loads the zas configuration from the zas-config.json
          */
         protected function loadConfig(){
-            $config = file_get_contents(ZasHelper::$configPath);
+            if(file_exists(ZasHelper::$configPath)){
+                $config = file_get_contents(ZasHelper::$configPath);
+            }
+            else{
+                $config = file_get_contents(__DIR__. "/../../../zas-config.json");
+            } 
             $this->zasConfig = json_decode($config);
         }
 
@@ -92,7 +97,7 @@
             $containerName = $argv[3] ?? "";
             if(empty($containerName))
             {
-                ZasHelper::log("Error::Name ERROR: No actor name");
+                ZasHelper::log("Error::Name ERROR: No name");
                 return;
             }
 
@@ -428,7 +433,7 @@
                         }
 
                         if($actorTypeDir == ""){
-                            ZasHelper::log("ERROR::ACTOR: Actor type must be fore or back");
+                            ZasHelper::log("ERROR::ACTOR: Actor type must be 'fore' or 'back'");
                             return;
                         }
 
@@ -538,6 +543,23 @@
                         ZasHelper::log("Successfully made $containerName supporter ". (($isDir)? "directory":"file"). " in $parentDirName");
 
                             break;
+                    }
+                case ZasConstants::ZC_CONFIG:
+                    {
+                        
+                        $tmpContent = file_get_contents($this->getFullPath($this->zasConfig->templatePath->configs));
+                        $tmpContent = str_replace("[CN]", $containerName, $tmpContent);
+
+                        $containerName = $this->toZasName($containerName, $this->zasConfig->fileNameSeparator);
+                        $maker = new FileMaker($this->zasConfig);
+                        $file = (object) $maker->in($this->zasConfig->path->configs)->make($containerName, "", $this->zasConfig->extensions->configs);
+
+                        file_put_contents($file->fullPath, $tmpContent);
+
+                        
+
+                        ZasHelper::log("Successfully made $containerName config file in {$this->zasConfig->path->configs}");
+                        break;
                     }
                 default:
                    {

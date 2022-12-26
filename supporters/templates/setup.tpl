@@ -1,10 +1,14 @@
 <?php
-    /**
-     * References the master setup or the setup file in the 
-     * root directory of this directory.
-     * You can add custom setup procedures for this directory here.
-     */
+/*
+|-------------------------------------------------------------
+| This setup file includes the parent setup file. The parent
+| setup file could be the master.setup.php or another setup
+| file.
+|-------------------------------------------------------------
+*/
 
-    require(__DIR__. "/../[SN].php");
+require(__DIR__. "/../[SN].php");
+
+// additional code ...
 
 ?>

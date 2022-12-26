@@ -15,33 +15,29 @@
          * However, the file separator is specified in the zasconfig.json.
          * 
          * takes O(n) time.
-         * @param string $fileName
+         * @param string $name
          * 
          * @return string
          */
-        public function toZasName(string $fileName, string $separator = "-"): string{
-            $fileName = trim($fileName);
-            $length = strlen($fileName);
+        public function toZasName(string $name, string $separator = "-"): string{
+            $name = trim($name);
             
             $newStr = "";
-            $firstCharMet = false;
+            $pastChar = false;
+            
+            for($i = 0; $i < strlen($name); $i++){
+            
+                $char = $name[$i];
+            
+                if(Character::isUpper($char)){
 
-            for($i = 0; $i < $length; $i++){
+                    $char = Character::lower($char);
+                    if($pastChar) $newStr .= $separator;
 
-                if($firstCharMet && preg_match("/[A-Z]/", $fileName[$i])){
-                    $newStr .= $separator . strtolower($fileName[$i]);
-                    continue;
                 }
-
-                if(!$firstCharMet){
-                    $firstCharMet = preg_match("/[a-zA-Z]/", $fileName[$i]) == true;
-                }
-
-                if($firstCharMet){
-                    $firstCharMet = !preg_match("/[\/\\\]/", $fileName[$i]);
-                }
-
-                $newStr .= strtolower($fileName[$i]);
+            
+                $newStr .= $char;
+                $pastChar = Character::isLetter($char);
             }
 
             return $newStr;
@@ -72,7 +68,7 @@
 
                 $root = $zasConf->directories->root;
 
-                $parentDir = preg_split("/$root/", __DIR__);
+                $parentDir = preg_split("/$root/", __DIR__, 2);
                 $rootDir = $parentDir[0].DIRECTORY_SEPARATOR."$root";
 
                 if(file_exists("$rootDir$path") && !is_dir("$rootDir$path")){
@@ -82,6 +78,21 @@
             }
 
             return $fullPath;
+        }
+
+
+        /**
+         * Get's the Main ZAS config file
+         * @return object
+         */
+        public function getZasConfig(){
+            global $zasConfig;
+            if($zasConfig) return $zasConfig;
+
+            $file = __DIR__. "/../../../../../../zas-config.json";
+            if(!file_exists($file)) $file = __DIR__ ."/../../../zas-config.json";
+
+            return json_decode(file_get_contents($file));
         }
 
     }

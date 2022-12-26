@@ -1,18 +1,22 @@
 <?php
-    // Comments with #.# are required by `zas` for code insertion.
+/*
+|-------------------------------------------------------------
+| Comments with #.# are required by `zas` for code insertion.
+|-------------------------------------------------------------
+*/
 
-    [NS]
+[NS]
 
-    #uns#
+#uns#
 
-    class [CN] <INHERITANCE>{
+class [CN] <INHERITANCE>{
 
-        # const ...
+    # const ...
 
-        /** 
-         * Constructor kept private so that no instance of this class can be created.
-         */
-        [C-VISIBILITY] function __construct(){}
-    }
+    /** 
+        * Constructor kept private so that no instance of this class can be created.
+        */
+    [C-VISIBILITY] function __construct(){}
+}
 
 ?>

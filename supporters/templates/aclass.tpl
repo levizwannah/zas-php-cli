@@ -1,19 +1,22 @@
 <?php
-    // Comments with #.# are required by `zas` for code insertion.
+/*
+|-------------------------------------------------------------
+| Comments with #.# are required by `zas` for code insertion.
+|-------------------------------------------------------------
+*/
+[NS]
 
-    [NS]
-
-    #uns#
+#uns#
 
 
-    abstract class [CN] <INHERITANCE> <CONTRACTS> {
+abstract class [CN] <INHERITANCE> <CONTRACTS> {
 
-        # use traits
-        #ut#
+    # use traits
+    #ut#
 
-        [C-VISIBILITY] function __construct(){
-            #code...
-        }
+    [C-VISIBILITY] function __construct(){
+        #code...
     }
+}
 
 ?>

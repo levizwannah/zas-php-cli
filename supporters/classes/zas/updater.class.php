@@ -16,7 +16,7 @@
          * @param array $functions
          * @param mixed $filePath
          * 
-         * @return [type]
+         * @return void
          */
         public function addFunc(array $functions, $filePath){
             if(count($functions) == 0) return;

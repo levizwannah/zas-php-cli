@@ -20,6 +20,7 @@
                 ZC_ABCLASS = "ab-class",
                 ZC_INFC = "interface",
                 ZC_CONST = "class-const",
+                ZC_CONFIG = "config",
                 ZC_UPD_ROOT = "update-root-path",
                 ZC_ACTOR = "actor",
                 ZC_SUPPORTER = "supporter",
@@ -64,14 +65,14 @@
          */
         const   SPACE_DEFAULT = 1,
                 ENTER_DEFAULT = 1,
-                TAB_DEFAULT = 1,
+                TAB_DEFAULT = 0,
                 INDENT_TAB = 1,
                 FUNC_INDENT_TAB = 2;
 
         /**
          * Constants for text
          */
-        const   TXT_PHP_INIT = "<?php\n\t#code..\n?>";
+        const   TXT_PHP_INIT = "<?php\n\n//code...\n?>";
 
         private function __construct(){}
     }
