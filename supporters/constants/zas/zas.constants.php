@@ -1,11 +1,11 @@
 <?php
-    namespace Zas;
+namespace Zas;
 
-    /**
-     * Contains all the constants for Zas helper
-     */
+/**
+ * Contains all the constants for Zas helper
+ */
 
-    class ZasConstants{
+class ZasConstant{
         /**
          * Errors
          */
@@ -17,9 +17,9 @@
         const   ZC_MAKE = "make",
                 ZC_CLASS = "class",
                 ZC_TRAIT = "trait",
-                ZC_ABCLASS = "ab-class",
+                ZC_ABCLASS = "abstract",
                 ZC_INFC = "interface",
-                ZC_CONST = "class-const",
+                ZC_CONST = "constant",
                 ZC_CONFIG = "config",
                 ZC_UPD_ROOT = "update-root-path",
                 ZC_ACTOR = "actor",
@@ -72,8 +72,8 @@
         /**
          * Constants for text
          */
-        const   TXT_PHP_INIT = "<?php\n\n//code...\n?>";
+        const   TXT_PHP_INIT = "<?php\n\n// code...\n?>";
 
         private function __construct(){}
-    }
+}
 ?>

@@ -11,11 +11,11 @@
 
 class [CN] <INHERITANCE>{
 
-    # const ...
+    // constants ...
 
     /** 
-        * Constructor kept private so that no instance of this class can be created.
-        */
+    * Constructor kept private so that no instance of this class can be created.
+    */
     [C-VISIBILITY] function __construct(){}
 }
 

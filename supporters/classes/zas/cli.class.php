@@ -30,22 +30,22 @@
             $mainCommand = strtolower($argv[1]);
 
             switch($mainCommand){
-                case ZasConstants::ZC_MAKE:
+                case ZasConstant::ZC_MAKE:
                     {
                         $this->execMake($argc, $argv);
                         return true;
                     }
-                case ZasConstants::ZC_UPD_ROOT:
+                case ZasConstant::ZC_UPD_ROOT:
                     {
                         $this->updateRootPath();
                         return true;
                     }
-                case ZasConstants::ZC_RUN:
+                case ZasConstant::ZC_RUN:
                     {
                         $this->run($argc, $argv);
                         return true;
                     }
-                case ZasConstants::ZC_HELP:
+                case ZasConstant::ZC_HELP:
                     {
                         $this->printHelp();
                         return true;

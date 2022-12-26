@@ -21,7 +21,7 @@
          * 
          * @return [type]
          */
-        public function tab(int $numOfTabs = ZasConstants::TAB_DEFAULT){
+        public function tab(int $numOfTabs = ZasConstant::TAB_DEFAULT){
             return str_repeat("\t", $numOfTabs);
         }
 
@@ -31,7 +31,7 @@
          * 
          * @return [type]
          */
-        public function space(int $numOfSpaces = ZasConstants::SPACE_DEFAULT){
+        public function space(int $numOfSpaces = ZasConstant::SPACE_DEFAULT){
             return str_repeat(" ", $numOfSpaces);
         }
 
@@ -41,7 +41,7 @@
          * 
          * @return [type]
          */
-        public function enter(int $times = ZasConstants::ENTER_DEFAULT){
+        public function enter(int $times = ZasConstant::ENTER_DEFAULT){
             return str_repeat("\n", $times);
         }
 
@@ -52,7 +52,7 @@
          * @return string
          */
         public function indent(string $str){
-            return $this->tab(ZasConstants::INDENT_TAB) . $str;
+            return $this->tab(ZasConstant::INDENT_TAB) . $str;
         }
 
         /**
@@ -62,7 +62,7 @@
          * @return string
          */
         public function methodIndent(string $str){
-            return $this->tab(ZasConstants::FUNC_INDENT_TAB) . $str;
+            return $this->tab(ZasConstant::FUNC_INDENT_TAB) . $str;
         }
 
 
@@ -72,7 +72,7 @@
          * 
          * @return string
          */
-        public function tabOnEnter( string $str, int $numTabs = ZasConstants::TAB_DEFAULT){
+        public function tabOnEnter( string $str, int $numTabs = ZasConstant::TAB_DEFAULT){
             $strArr = explode("\n", $str);
             $numTabs = $numTabs;
             $newStr = "";

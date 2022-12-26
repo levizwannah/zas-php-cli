@@ -12,7 +12,7 @@ require(__DIR__ . "/zas-auto-loader.class.php");
 |--------------------------------------------------
 */
 
-$zasConfig = $zasConfig ?? json_decode(file_get_contents(__DIR__ . "/zas-config.php"));
+$zasConfig = $zasConfig ?? json_decode(file_get_contents(__DIR__ . "/zas-config.json"));
 
 $autoloader = new ZasAutoLoader();
 $autoloader->autoLoad();

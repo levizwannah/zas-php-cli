@@ -12,10 +12,10 @@
 
     "extensions": {
         "class": "class.php",
-        "abstractClass": "aclass.php",
+        "abstractClass": "abstract.php",
         "interface": "ifc.php",
         "trait": "trait.php",
-        "constantsClass": "const.php",
+        "constantsClass": "constants.php",
         "include": "inc.php",
         "configs": "config.php",
         "actors": {
@@ -58,7 +58,7 @@
         "abstractClass": "^Abstract\\w+$",
         "interface": "^\\w+Interface$",
         "trait": "\\w+Trait$",
-        "constantsClass": "\\w+Constants$",
+        "constantsClass": "\\w+Constant$",
         "class": ".*"
     },
 
