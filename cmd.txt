@@ -20,8 +20,8 @@ Default Zas Commands:
                      [-t trait1 trait2 trait3 ... traitN]
             - for interface: [-e interface1 interface2 interface3 ] 
             - for trait: [-t trait1 trait2 ... traitN]
-            - for ab-class: same as class
-            - for class-const: [-p parentConstantClass]
+            - for abstract: same as class
+            - for constant: [-p parentConstantClass]
                       
     
     2. php zas make [actor|supporter] [name] [-in fore|back] [-p parent folder name] [-d]
