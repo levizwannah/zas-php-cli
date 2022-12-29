@@ -20,7 +20,7 @@
          */
         public function getFuncToImplement(string $filePath){
             $fileContents = file_get_contents($filePath);
-            $unwantedCnt = preg_split("/(public|protected)?\s+?function\s+\w+\(.*\)\s*;/", $fileContents, -1, PREG_SPLIT_NO_EMPTY);
+            $unwantedCnt = preg_split("/(public|protected)?\s+?(static\s+)?function\s+\w+\(.*\)\s*(:\n*\s*.+)?\s*;/", $fileContents, -1, PREG_SPLIT_NO_EMPTY);
 
             foreach($unwantedCnt as $unwanted){
                 $fileContents = str_replace("$unwanted", "", $fileContents);

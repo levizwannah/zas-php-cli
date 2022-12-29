@@ -26,14 +26,14 @@ class Updater extends AbstractCommandExecutor  {
         $fmt = new Formatter();
 
         foreach($functions as $func){
-            $funcStr .= $fmt->tabOnEnter("$func{\n".$fmt->tab()."#code...\n}", ZasConstant::FUNC_INDENT_TAB). $fmt->enter();
+            $funcStr .= $fmt->tabOnEnter("$func {\n".$fmt->tab(ZasConstant::INDENT_TAB)."// code...\n}", ZasConstant::INDENT_TAB). $fmt->enter();
         }
 
         preg_match("/\{[\W\w.]*\}/", $fileContents, $match);        
         $foundCnt = $match[count($match)-1];
         $tmp = explode("}", $foundCnt);
         array_pop($tmp);
-        $str = implode("}", $tmp) . $funcStr . $fmt->indent("}");
+        $str = implode("}", $tmp) . $funcStr . "}";
         $fileContents = str_replace($foundCnt, $str, $fileContents);
         file_put_contents($filePath, $fileContents);
     }
