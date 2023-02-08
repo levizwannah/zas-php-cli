@@ -6,8 +6,15 @@
 | file.
 |-------------------------------------------------------------
 */
+(
+    isset($loaded)
+    &&
+    isset($loaded[dirname(__DIR__)])
+)
+or
+require(dirname(__DIR__). "/[SN].php");
 
-require(__DIR__. "/../[SN].php");
+$loaded[__DIR__] = 1;
 
 // additional code ...
 
